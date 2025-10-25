@@ -18,14 +18,21 @@ workflows:
           
       - name: Build APK (release)
         script: |
-          flutter build apk --release
+          flutter build apk --release \
+            --split-per-abi \
+            --obfuscate \
+            --split-debug-info=build/app/symbols
 
       - name: Build AppBundle (AAB) for Play Store
         script: |
-          flutter build appbundle --release
+          flutter build appbundle --release \
+            --obfuscate \
+            --split-debug-info=build/app/symbols
 
     artifacts:
-      - build/app/outputs/flutter-apk/app-release.apk
+      - build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
+      - build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
+      - build/app/outputs/flutter-apk/app-x86_64-release.apk
       - build/app/outputs/bundle/release/app-release.aab
       - flutter_drive.log
 
