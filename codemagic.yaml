@@ -2,14 +2,16 @@ workflows:
   m3pay-android:
     name: Build m3pay Android App
     max_build_duration: 60
-    instance_type: mac_mini_m2
+    instance_type: mac_mini_m2  # Good choice, has 8GB RAM
     environment:
       flutter: "3.35.3"
       xcode: "16.2"
       groups:
-        - google_credentials  # optional, if you add Play Store keys later
+        - google_credentials
       vars:
-        PACKAGE_NAME: "com.m3pay.app"  # change this to your real package name
+        PACKAGE_NAME: "com.edubest.felitech"
+        # Add Gradle memory options
+        GRADLE_OPTS: "-Xmx4096m -XX:MaxPermSize=1024m -XX:+HeapDumpOnOutOfMemoryError"
     scripts:
       - name: Get Flutter dependencies
         script: |
@@ -18,6 +20,7 @@ workflows:
           
       - name: Build APK (release)
         script: |
+          export JAVA_OPTS="-Xmx4096m"
           flutter build apk --release \
             --split-per-abi \
             --obfuscate \
@@ -25,6 +28,7 @@ workflows:
 
       - name: Build AppBundle (AAB) for Play Store
         script: |
+          export JAVA_OPTS="-Xmx4096m"
           flutter build appbundle --release \
             --obfuscate \
             --split-debug-info=build/app/symbols
@@ -39,7 +43,7 @@ workflows:
     publishing:
       email:
         recipients:
-          - your@email.com   # change to your email
+          - your@email.com
         notify:
           success: true
           failure: true
