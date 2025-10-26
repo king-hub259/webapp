@@ -1,10 +1,10 @@
 //With PHP backend
-const BASE_URL = "http://edubest.com.ng";
+const BASE_URL = "http://app.edubest.com.ng";
 
 //without PHP backend
 const PURCHASE_CODE = '';
 const BASE_URL_OFFLINE =
-    'https://edubest.com.ng';
+    'https://app.edubest.com.ng';
 
 //preference
 const mOneSignalID = 'mOne_signal_id';
