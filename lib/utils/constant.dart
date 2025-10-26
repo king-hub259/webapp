@@ -1,5 +1,5 @@
 //With PHP backend
-const BASE_URL = "http://app.edubest.com.ng";
+const BASE_URL = "https://app.edubest.com.ng";
 
 //without PHP backend
 const PURCHASE_CODE = '';
